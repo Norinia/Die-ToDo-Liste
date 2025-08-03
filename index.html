@@ -4,13 +4,16 @@
   <meta charset="UTF-8">
   <title>Etiketten-ToDo</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.ico" type="image/icon.ico">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
 </head>
 <body>
   <div class="app"> <!--Ort wo alles drin passiert-->
     <h1>📝 Meine Aufgaben</h1>
     <div class="input-area"> <!-- Eingabefeld und Button--->
       <input type="text" id="taskInput" placeholder="Was ist die Aufgabe?"> 
-      <button id="button">Hinzufügen</button>
+      <button id="addButton">Hinzufügen</button>
     </div>
     <div id="taskList" class="task-list"></div> <!-- einfach ein Div für die Aufgaben, regelt alles JS-->
   </div>

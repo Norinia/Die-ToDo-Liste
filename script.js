@@ -1,36 +1,78 @@
-const button = document.getElementById('button');
+const addButton = document.getElementById('addButton');
 const taskInput = document.getElementById('taskInput');
 const taskList = document.getElementById('taskList');
 
-// fügr 
+// WEnn die seite geladen wurde werden gespeicherte Aufgaben geladen
+window.addEventListener('DOMContentLoaded', loadTasks);
+
 
 // Funktion zum Hinzufügen einer Aufgabe
-function addTask() {
-  const text = taskInput.value.trim();
-  if (text === '') return;
-
+function addTask(text) {
   //erstellt ein neues Etikett
   const task = document.createElement('div');
-  task.className = 'task';
-  task.textContent = text;
+  task.className = 'task'; //Klasse für css
+  task.textContent = text; // text setzten
 
   // Aufgabe klickbar machen (zum Entfernen)
   task.addEventListener('click', () => {
-    task.remove(); // Etikett wird entfernt
+    task.remove();// Etikett wird entfernt
+    removeTask(text); // und aus dem speicher gelöscht
+
+    // Konfetti starten!
+    confetti({
+    particleCount: 100,
+    spread: 100,
+    origin: { x: 0.5 }
+  });
   });
 
-  taskList.appendChild(task);
-  taskInput.value = '';
+  taskList.appendChild(task); // wird in die Liste der andern Aufgaben eingefügt
 }
 
-button.addEventListener('click', addTask);
 
-// Enter-Taste drücken im Eingabefeld
+function handleAdd(){ 
+   const text = taskInput.value.trim(); // leezeichen Entvernem?
+  if (text === '') return; // wenn leer abrechen
+
+  addTask(text);           // anzeigen
+  saveTask(text);          // im Browser speichern
+  taskInput.value = '';    // Eingabefeld leeren
+}
+
+// KLick auf den Button
+addButton.addEventListener('click', handleAdd);
+
+
+// Enter-Taste drücken wenn was eigegebn wurde
 taskInput.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') {
-    addTask();
+    handleAdd();
   }
-
  });
 
 
+ // speichert die Aufgabe
+ function saveTask(text) {
+  const tasks = getTasks(); // Aktuelle Lsite holen
+  tasks.push(text); // neue aufgabe hinzufügen 
+  localStorage.setItem('tasks', JSON.stringify(tasks)); // speichern 
+}
+
+// Aufgaben werden beim öffnen geladen
+function loadTasks() {
+  const tasks = getTasks();
+  tasks.forEach(addTask);
+}
+
+// Löscht die Aufgabe aus dem Speicher
+function removeTask(text) {
+  let tasks = getTasks();
+  tasks = tasks.filter(t => t !== text);
+  localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
+// holt die Aufgabe aus dem Speicher
+function getTasks() {
+  const saved = localStorage.getItem('tasks');
+  return saved ? JSON.parse(saved) : [];
+}
