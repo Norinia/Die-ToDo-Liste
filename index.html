@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Etiketten-ToDo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app"> <!--Ort wo alles drin passiert-->
+    <h1>📝 Meine Aufgaben</h1>
+    <div class="input-area"> <!-- Eingabefeld und Button--->
+      <input type="text" id="taskInput" placeholder="Was ist die Aufgabe?"> 
+      <button id="button">Hinzufügen</button>
+    </div>
+    <div id="taskList" class="task-list"></div> <!-- einfach ein Div für die Aufgaben, regelt alles JS-->
+  </div>
+
+  <script src="script.js"></script> <!-- steht am Ende weil dann alles fertig geladen wurde und es seine Daten bekommen kann-->
+</body>
+</html>
