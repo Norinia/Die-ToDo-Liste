@@ -1,6 +1,7 @@
 const addButton = document.getElementById('addButton');
 const taskInput = document.getElementById('taskInput');
 const taskList = document.getElementById('taskList');
+const sound = document.getElementById('printSound');
 
 // WEnn die seite geladen wurde werden gespeicherte Aufgaben geladen
 window.addEventListener('DOMContentLoaded', loadTasks);

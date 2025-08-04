@@ -49,24 +49,26 @@ button:hover {
 .task {
   background: #ffffff;
   border: 1px solid #000000;
-  padding: 10 px 15px;
-  border-radius: 5px;
+  padding: 15px;
   position: relative;
   cursor:pointer;
   border-radius: 30px; /* Abrunden */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  animation: printTask 0.4s ease-out;
+  transform-origin: top; /*bewegung startet von oben*/
 }
 
 @keyframes printTask {
   0% {
-    opacity: 0;
-    transform: translateY(-30px) scaleY(0.7);
+    opacity: 0; /*weiches Einbländenn*/
+    transform: translateY(-30px) scaleY(0.7) rotate(-9deg);
   }
   60% {
     opacity: 1;
-    transform: translateY(10px) scaleY(1.05);
+    transform: translateY(10px) scaleY(1.05) rotate(1deg);
   }
   100% {
     opacity: 1;
-    transform: translateY(0) scaleY(1);
+    transform: translateY(0) scaleY(1) rotate(0);
   }
 }
