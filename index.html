@@ -11,15 +11,25 @@
 <body>
   <div class="app"> <!--Ort wo alles drin passiert-->
     <h1>📝 Meine Aufgaben</h1>
-    <div class="input-area"> <!-- Eingabefeld und Button--->
+
+      <div id="xpArea">
+        <div id="xpBar"></div>
+        <span id="xpText">Level 1 – 0 / 100 XP</span>
+      </div>
+
+    <div class="inputArea"> <!-- Eingabefeld und Button--->
       <input type="text" id="taskInput" placeholder="Was ist die Aufgabe?"> 
       <button id="addButton">Hinzufügen</button>
     </div>
     <div id="taskList" class="task-list"></div> <!-- einfach ein Div für die Aufgaben, regelt alles JS-->
   </div>
 
+  
+
   <script src="script.js"></script> <!-- steht am Ende weil dann alles fertig geladen wurde und es seine Daten bekommen kann-->
-  <audio id="printSound" src="audio/print.mp3" preload="auto"></audio>
+
+<audio id="printSound" src="audio/print.mp3" preload="auto"></audio>
+
 
 </body>
 </html>

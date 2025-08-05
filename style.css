@@ -12,7 +12,7 @@ body {
   margin: auto;
 }
 
-.input-area {
+.inputArea {
   display: flex;
   gap: 10px;
 }
@@ -54,11 +54,54 @@ button:hover {
   cursor:pointer;
   border-radius: 30px; /* Abrunden */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  animation: printTask 0.4s ease-out;
+  animation: print 0.4s ease-out;
   transform-origin: top; /*bewegung startet von oben*/
 }
 
-@keyframes printTask {
+#xpArea {
+  width: 50%;
+  height: 20px;
+  background: #ddd;
+  border-radius: 10px;
+  margin: 20px auto;
+  position: relative;
+  overflow: hidden;
+
+}
+
+#xpBar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(to right, #d73160, #00f2fe);
+  transition: width 0.3s ease;
+}
+
+
+.xp-feedback {
+  position: fixed;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #253a4c;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-weight: bold;
+  animation: riseFade 1s ease-out;
+}
+
+@keyframes riseFade {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-30px);
+  }
+}
+
+@keyframes print {
   0% {
     opacity: 0; /*weiches Einbländenn*/
     transform: translateY(-30px) scaleY(0.7) rotate(-9deg);
