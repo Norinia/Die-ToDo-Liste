@@ -5,8 +5,13 @@ const sound = document.getElementById('printSound');
 let currentXP = 0;
 let level = 1;
 let xpForNextLevel = 60;
+const resetXPButton = document.getElementById('resetXPBtn');
+
 // WEnn die seite geladen wurde werden gespeicherte Aufgaben geladen
-window.addEventListener('DOMContentLoaded', loadTasks);
+window.addEventListener('DOMContentLoaded', () => {
+   loadTasks();
+   loadXP();
+});
 
 
 // Funktion zum Hinzufügen einer Aufgabe
@@ -94,7 +99,7 @@ function addXP(amount) {
     //xpForNextLevel = Math.floor(xpForNextLevel * 1.2); // steigert sich
     alert(`Level Up! Du bist jetzt Level ${level}`);
   }
-
+  saveXP();
   updateXPBar();
 }
 
@@ -112,3 +117,35 @@ function showXP(amount) {
 
   setTimeout(() => show.remove(), 2000);
 }
+
+function saveXP() {
+  localStorage.setItem('currentXP', currentXP);
+  localStorage.setItem('level', level);
+}
+
+ function loadXP() {
+  const savedXP = localStorage.getItem('currentXP');
+  const savedLevel = localStorage.getItem('level');
+  if (savedXP !== null && savedLevel !== null) {
+    currentXP = parseInt(savedXP, 10);
+    level = parseInt(savedLevel, 10);
+  }
+  updateXPBar();
+}
+
+function resetXP() {
+  // Gesamt XP und Level zurücksetzen
+  currentXP = 0;
+  level = 1;
+  updateXPBar();
+  saveXP();
+
+  // Tages-XP zurücksetzen (für heutigen Tag)
+  const todayKey = getTodayKey();
+  localStorage.removeItem(todayKey);
+  updateDailyXPDisplay(0);
+
+  alert('Deine gesammelten XP wurden zurückgesetzt!');
+}
+
+resetXPButton.addEventListener('click', resetXP);
