@@ -2,7 +2,9 @@ const addButton = document.getElementById('addButton');
 const taskInput = document.getElementById('taskInput');
 const taskList = document.getElementById('taskList');
 const sound = document.getElementById('printSound');
-
+let currentXP = 0;
+let level = 1;
+let xpForNextLevel = 60;
 // WEnn die seite geladen wurde werden gespeicherte Aufgaben geladen
 window.addEventListener('DOMContentLoaded', loadTasks);
 
@@ -18,6 +20,8 @@ function addTask(text) {
   task.addEventListener('click', () => {
     task.remove();// Etikett wird entfernt
     removeTask(text); // und aus dem speicher gelöscht
+    addXP(10);
+    showXP(10); 
 
     // Konfetti starten!
     confetti({
@@ -76,4 +80,35 @@ function removeTask(text) {
 function getTasks() {
   const saved = localStorage.getItem('tasks');
   return saved ? JSON.parse(saved) : [];
+}
+
+
+// XP hinzufügen
+function addXP(amount) {
+  currentXP += amount;
+
+  // Level-Up prüfen
+  if (currentXP >= xpForNextLevel) {
+    level++;
+    currentXP -= xpForNextLevel;
+    //xpForNextLevel = Math.floor(xpForNextLevel * 1.2); // steigert sich
+    alert(`Level Up! Du bist jetzt Level ${level}`);
+  }
+
+  updateXPBar();
+}
+
+function updateXPBar() {
+  const percent = (currentXP / xpForNextLevel) * 100;
+  document.getElementById('xpBar').style.width = percent + '%';
+  document.getElementById('xpText').textContent = `Level ${level} – ${currentXP} / ${xpForNextLevel} XP`;
+}
+
+function showXP(amount) {
+  const show= document.createElement('div');
+  show.textContent = `+${amount} XP`;
+  show.className = 'xp-feedback';
+  document.body.appendChild(show);
+
+  setTimeout(() => show.remove(), 2000);
 }
