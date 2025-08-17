@@ -25,15 +25,19 @@ function addTask(text) {
   task.addEventListener('click', () => {
     task.remove();// Etikett wird entfernt
     removeTask(text); // und aus dem speicher gelöscht
-    addXP(10);
-    showXP(10); 
+    
 
     // Konfetti starten!
     confetti({
     particleCount: 100,
     spread: 100,
     origin: { x: 0.5 }
+
   });
+
+    addXP(10);
+    showXP(10); 
+
   });
 
   taskList.appendChild(task); // wird in die Liste der andern Aufgaben eingefügt
